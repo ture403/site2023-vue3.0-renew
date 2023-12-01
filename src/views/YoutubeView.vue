@@ -2,7 +2,7 @@
   <div>
     <ContTitle title="youtube" />
 <!--    <YoutubeSlider :youtubes="youtubes" />-->
-    <YoutubeSearch />
+    <YoutubeSearch @search="handleChannelClick" />
     <YoutubeTag @tag="handleChannelClick" />
     <YoutubeCont :youtubes="youtubes" />
   </div>
@@ -30,6 +30,7 @@ export default {
     function handleChannelClick(channel) {
         TopYoutube(channel);
     }
+
     const youtubes = ref([]);
 
     const TopYoutube = async (channel) => {

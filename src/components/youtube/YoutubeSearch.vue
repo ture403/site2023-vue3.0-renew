@@ -1,14 +1,20 @@
 <template>
   <div className="youtube__search container">
-    <input v-model="text" type="text" placeholder="유튜브 검색하기" />
-    <button>검색</button>
+    <input v-model="text" type="text" placeholder="유튜브 검색하기" @keyup.enter="search" />
+    <button @click.prevent="search">검색</button>
   </div>
 </template>
 <script setup>
-  import {ref} from "vue";
+  import {ref, defineEmits} from "vue";
 
-  const text = ref()
-  console.log(text);
+  let text = ref("");
+
+  const props = defineProps(["search"]); // 이벤트명 미리 정의
+  const emits = defineEmits();
+
+  const search = () => {
+    emits('search',text.value)
+  }
 </script>
 <style lang="scss" scoped>
 @import "@/assets/scss/setting/mixins";
