@@ -1,7 +1,7 @@
 <template>
   <div className="unsplash__search container">
-    <input type="text" placeholder="사진 검색하기" v-model="text" />
-    <button @click="sendSearch" @keyup.enter="sendSearch">검색</button>
+    <input type="text" placeholder="사진 검색하기" v-model="text" @keyup.enter="sendSearch" />
+    <button @click="sendSearch" >검색</button>
   </div>
 </template>
 <script setup>
