@@ -1,8 +1,8 @@
 <template>
   <div>
     <ContTitle title="unsplash" />
-    <UnsplashSearch @click="handleChannel" />
-    <UnsplashTag @click="handleChannel"/>
+    <UnsplashSearch @response="handleChannel"/>
+    <UnsplashTag @response="handleChannel" />
     <UnsplashCont :unsplash="unsplash" />
   </div>
 </template>
@@ -13,12 +13,12 @@ import UnsplashCont from "@/components/unsplash/UnsplashCont.vue";
 import UnsplashSearch from "@/components/unsplash/UnsplashSearch.vue";
 import UnsplashTag from "@/components/unsplash/UnsplashTag.vue";
 
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 
-const unsplash = ref([]);
+const unsplash = ref({ data: [] });
 
-const handleChannel = async (query) => {
-    await search(query)
+const handleChannel = (query) => {
+     search(query)
 }
 
 const search = async (query) => {
@@ -35,9 +35,11 @@ const search = async (query) => {
   )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
-        unsplash.value = result
+        unsplash.value = { ...unsplash.value, data: result.results };
       })
       .catch((error) => console.log("error", error));
 };
+onMounted(()=>{
+  handleChannel()
+})
 </script>
