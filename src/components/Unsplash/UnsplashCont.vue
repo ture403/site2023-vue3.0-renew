@@ -27,7 +27,6 @@ const selected = ref([])
 const openModal = (splash) => {
   isOpen.value = true
   selected.value = splash
-  console.log(selected)
 }
 const closeModal = () => {
   isOpen.value = false
@@ -36,14 +35,10 @@ const closeModal = () => {
 let unsplashs = ref(props.unsplash.data);
 
 watch(() => props.unsplash, (newVal) => {
-  // unsplashs를 새로운 객체로 교체하여 Vue의 반응성 유지
   unsplashs = ref([...newVal.data]);
 }, { deep: true });
 
 
-function popOpen(){
-  isOpen.value = true
-}
 
 </script>
 <style lang="scss">
@@ -72,6 +67,14 @@ function popOpen(){
   }
 }
 .popOpen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 500px;
+  box-shadow: 5px 3px 3px #000;
   span{
     display: block;
     text-align: right;
@@ -83,14 +86,6 @@ function popOpen(){
     color: #fff;
     cursor: pointer;
   }
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 999;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 500px;
-  box-shadow: 5px 3px 3px #000;
   .wrap {
     width: 100%;
     height: 100%;
